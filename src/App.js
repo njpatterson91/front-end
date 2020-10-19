@@ -8,7 +8,7 @@ import schema from './schema/schema'
 
 
 const initialprofiles = [
-  {id: uuid(), name: 'Throckmorton', email:'sk8tercousin@hautmail.com', password: 'coolsk8'},
+  {id: uuid(), name: 'Throckmorton', email:'sk8tercousin@hawtmail.com', password: 'coolsk8'},
   {id: uuid(), name: 'Hue Janus', email:'HueJ@hautmail.com', password: 'hole'},
   {id: uuid(), name: 'Phil Mckracken', email:'Philcrack@hautmail.com', password: 'Davey Jones Locker'},
 ]
@@ -67,9 +67,9 @@ export default function App() {
   useEffect(() => {
     schema.isValid(formValues).then((valid) => {
      setDisabled(!valid);
-     console.log(valid)
     });
   }, [formValues]);
+  console.log(profiles)
 
   return (
     <div className="App">
@@ -81,9 +81,11 @@ export default function App() {
          disabled={disabled}
          errors={formErrors}
         />
-        {profiles.map(fr => <div key={fr.id}>
-          {fr.name} {fr.email} 
-        </div>)
+        
+        {profiles.map((prof) => { 
+        return <div key={prof.id}>
+          {prof.name} {prof.email} 
+        </div>})
         }
       </header>
     </div>

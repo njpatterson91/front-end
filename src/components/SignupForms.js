@@ -1,10 +1,45 @@
 import React from 'react';
 import '../components/SignupForms';
+import styled from 'styled-components'
 
+
+const NiceDiv = styled.div `
+margin:10%;
+font-weight: bold;
+
+`
+const StyledInput = styled.input`
+border: solid 10px steelblue;
+border-radius: 20px;
+&:hover {
+    color:blue;
+    transform: scale(1.1);
+     transition: all .5s ease-in-out;
+
+}
+transition: all .5s ease-in-out;
+
+`
+const StyledBtn = styled.button`
+font-size: 2rem;
+border-radius: 15px;
+border: solid skyblue ;
+background: steelblue;
+color: white;
+font-weight: bolder;
+&:hover {
+    color:blue;
+    transform: scale(1.1);
+     transition: all .5s ease-in-out;
+
+}
+transition: all .5s ease-in-out;
+
+`
 
 export default function Form(props){
   
-    const { values, submit, change, disabled } = props;
+    const { values, submit, change, disabled, errors } = props;
  
     
     const onSubmit = (evt) => {
@@ -18,33 +53,39 @@ export default function Form(props){
         change(name, valueToUse);
     };
   return (
-    <div className="App">
-        <form id ='theform' onSubmit = {onSubmit}>
+    <form id ='theform' onSubmit = {onSubmit}>
+        <div className="App">
 
-            <div>
+            <div className="errors">
+                <div>{errors.name}</div>
+                <div>{errors.email}</div>
+                <div>{errors.password}</div>
+            </div>
+
+            <NiceDiv>
                 <label htmlFor = 'name'> Name </label>
-                    <input 
+                    <StyledInput 
                     type = 'text'
                     name = 'name'
                     value = {values.name}
                     onChange={onChange}
                 />
-            </div>
+            </NiceDiv>
 
-            <div>
+            <NiceDiv>
                 <label htmlFor = 'email'>Email </label>
-                    <input 
+                    <StyledInput 
                         type = 'text'
                         name = 'email'
                         id = 'email'
                         value = {values.email}
                         onChange={onChange}
                     />
-            </div>
+            </NiceDiv>
 
-            <div>
+            <NiceDiv>
             <label htmlFor = 'password'> Password</label>
-                <input 
+                <StyledInput 
                     type ='text'
                     id = 'password' 
                     name = 'password'
@@ -52,10 +93,10 @@ export default function Form(props){
                     onChange={onChange}
 
                 />
-            </div>
+            </NiceDiv>
 
-            <button id= 'submitBtn' type = 'submit' disabled = {disabled}>Submit</button>
-        </form>
-    </div>
+            <StyledBtn id= 'signupBtn' type = 'signup' disabled = {disabled}>Sign Up!</StyledBtn>
+        </div>
+    </form>
   );
 }
