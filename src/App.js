@@ -4,8 +4,11 @@ import {v4 as uuid} from 'uuid'
 import * as yup from 'yup'
 import './App.css';
 import schema from './schema/schema'
+import styled from 'styled-components'
 
-
+const Title = styled.h2`
+margin-bottom: 0%auto;
+`
 
 const initialprofiles = [
   {id: uuid(), name: 'Throckmorton', email:'sk8tercousin@hawtmail.com', password: 'coolsk8'},
@@ -74,6 +77,8 @@ export default function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Title>Potluck Planner</Title>
+        </header>
         <Form
          values={formValues}
          change={inputChange}
@@ -87,8 +92,10 @@ export default function App() {
           {prof.name} {prof.email} 
         </div>})
         }
-      </header>
+      
+      <footer id= 'bigfoot'> </footer>
     </div>
+    
   );
 }
 

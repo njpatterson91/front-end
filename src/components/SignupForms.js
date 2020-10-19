@@ -2,15 +2,20 @@ import React from 'react';
 import '../components/SignupForms';
 import styled from 'styled-components'
 
+const AppHead = styled.div`
+background-image: url('https://images.unsplash.com/photo-1575879911904-ca5d889c6c7e?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=4800');
+
+background-size: 100%;
+`
 
 const NiceDiv = styled.div `
-margin:10%;
+margin:3% 5% 5% 5%;
 font-weight: bold;
-
 `
 const StyledInput = styled.input`
 border: solid 10px steelblue;
 border-radius: 20px;
+margin-top: 5%;
 &:hover {
     color:blue;
     transform: scale(1.1);
@@ -27,6 +32,7 @@ border: solid skyblue ;
 background: steelblue;
 color: white;
 font-weight: bolder;
+margin-bottom: 5%;
 &:hover {
     color:blue;
     transform: scale(1.1);
@@ -54,7 +60,7 @@ export default function Form(props){
     };
   return (
     <form id ='theform' onSubmit = {onSubmit}>
-        <div className="App">
+        <AppHead className="App">
 
             <div className="errors">
                 <div>{errors.name}</div>
@@ -96,7 +102,7 @@ export default function Form(props){
             </NiceDiv>
 
             <StyledBtn id= 'signupBtn' type = 'signup' disabled = {disabled}>Sign Up!</StyledBtn>
-        </div>
+        </AppHead>
     </form>
   );
 }
