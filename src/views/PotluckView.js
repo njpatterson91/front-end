@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/potluckView.css";
 import { Input, Button } from "@material-ui/core";
+import SendIcon from "@material-ui/icons/Send";
 
 export default function PotluckView() {
   return (
@@ -40,11 +41,12 @@ export default function PotluckView() {
             backgroundColor: "#f1faee",
             width: "80%",
             margin: "3%",
-            borderTopLeftRadius: "10px",
-            borderTopRightRadius: "10px",
           }}
         />
-        <Button style={{ backgroundColor: "white" }}>Send</Button>
+        <Button style={{ backgroundColor: "white" }}>
+          <SendIcon />
+          Send
+        </Button>
       </div>
       <div class="AttendeesHeader">
         <h3>People Coming</h3>

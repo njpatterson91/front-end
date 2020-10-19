@@ -48,6 +48,9 @@ h3 {
 .ItemsToBring {
   grid-area: ItemsToBring;
   background-color: #f1faee;
+  margin: 0% 2%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .ItemsImBringingHeader {
@@ -60,6 +63,10 @@ h3 {
 .ItemsImBringing {
   grid-area: ItemsImBringing;
   background-color: #f1faee;
+  margin: 0% 2%;
+  margin-bottom: 1%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .ChatHeader {
@@ -72,6 +79,9 @@ h3 {
 .Chat {
   grid-area: Chat;
   background-color: #f1faee;
+  margin: 0% 2%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .ChatInput {
@@ -89,6 +99,10 @@ h3 {
 .Attendees {
   grid-area: Attendees;
   background-color: #f1faee;
+  margin: 0% 4%;
+  margin-bottom: 2%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 /* For presentation only, no need to copy the code below */
