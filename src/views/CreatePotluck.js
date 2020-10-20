@@ -3,8 +3,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { createPotluck } from "../store/atoms";
+import { useHistory } from "react-router-dom";
+import { axiosWithAuth } from "../utilities/axiosWithAuth";
 
 const CSSGrid = styled.div`
+  input {
+    margin: 5% auto;
+  }
   .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -41,7 +46,7 @@ const CSSGrid = styled.div`
   .Date {
     text-align: center;
     grid-area: Date;
-    background-color: #f1faee;
+    background-color: #83aec9;
     margin: 0% 2%;
     margin-bottom: 1%;
     border-bottom-left-radius: 10px;
@@ -51,7 +56,7 @@ const CSSGrid = styled.div`
   .Location {
     text-align: center;
     grid-area: Location;
-    background-color: #f1faee;
+    background-color: #83aec9;
     margin: 0% 2%;
     margin-bottom: 1%;
     border-bottom-left-radius: 10px;
@@ -61,7 +66,7 @@ const CSSGrid = styled.div`
   .Time {
     text-align: center;
     grid-area: Time;
-    background-color: #f1faee;
+    background-color: #83aec9;
     margin: 0% 2%;
     margin-bottom: 1%;
     border-bottom-left-radius: 10px;
@@ -77,7 +82,7 @@ const CSSGrid = styled.div`
 
   .ItemList {
     grid-area: ItemList;
-    background-color: #f1faee;
+    background-color: #83aec9;
     margin: 0% 2%;
     margin-bottom: 1%;
     border-bottom-left-radius: 10px;
@@ -85,6 +90,7 @@ const CSSGrid = styled.div`
   }
 
   .AddItem {
+    text-align: center;
     grid-area: AddItem;
     background-color: #285ca5;
     margin-bottom: 2%;
@@ -99,9 +105,9 @@ const CSSGrid = styled.div`
   }
 `;
 
-export default function CreatePotluck() {
+export default function CreatePotluck(props) {
   const [create, setCreate] = useRecoilState(createPotluck);
-
+  const id = window.localStorage.getItem("userID");
   const changeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -111,9 +117,23 @@ export default function CreatePotluck() {
     });
     console.log(create);
   };
+
   useEffect(() => {
     console.log(create);
   }, [create]);
+
+  let history = useHistory();
+
+  const submitPotluck = () => {
+    console.log(create);
+    axiosWithAuth()
+      .post(`/users/${id}/potlucks`, create)
+      .then((res) => {
+        console.log(res.data);
+        history.push(`/view/${res.data.newPotluck.id}`);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <CSSGrid>
       <div class="grid-container">
@@ -158,7 +178,9 @@ export default function CreatePotluck() {
           <h3>Items Needed</h3>
         </div>
         <div class="ItemList"></div>
-        <div class="AddItem"></div>
+        <div class="AddItem">
+          <button onClick={submitPotluck}>Submit</button>
+        </div>
       </div>
     </CSSGrid>
   );

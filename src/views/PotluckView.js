@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../css/potluckView.css";
 import { Input, Button } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { displayedPotluck, displayedPotluckGuests } from "../store/atoms";
+import { useParams } from "react-router-dom";
+import { axiosWithAuth } from "../utilities/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
 const CSSGrid = styled.div`
   .grid-container {
@@ -114,20 +119,58 @@ const CSSGrid = styled.div`
 `;
 
 export default function PotluckView() {
+  const params = useParams();
+  const id = params.id;
+  const [displayed, setDisplayed] = useRecoilState(displayedPotluck);
+  const [guests, setGuests] = useRecoilState(displayedPotluckGuests);
+  const [isOrganizer, setIsOrganizer] = useState(false);
+  const [organizerID, setOrganizerID] = useState(0);
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/potlucks/${id}`)
+      .then((res) => {
+        setDisplayed(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+    axiosWithAuth()
+      .get(`/potlucks/${id}/guests`)
+      .then((res) => {
+        setGuests(res.data);
+        setOrganizerID(res.data[0].user_id);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
+    if (parseInt(window.localStorage.getItem("userID")) === organizerID) {
+      setIsOrganizer(true);
+    }
+  }, [guests]);
+  let history = useHistory();
+  const deletePotluck = () => {
+    axiosWithAuth().delete(`/potlucks/${id}`);
+    history.push("/dashboard");
+  };
   return (
     <CSSGrid>
       <div class="grid-container">
         <div class="NavBar"></div>
         <div class="Facilitator">
-          <h2>UserName</h2>
+          <h2>{displayed.event_name}</h2>
           <img
             src={
               "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"
             }
             alt=""
           />
-          <p>Date</p>
-          <p>Time</p>
+          <p>Date: {displayed.event_date}</p>
+          <p>Time: {displayed.event_time}</p>
+          <p>Location: {displayed.event_address}</p>
+          <button disabled={!isOrganizer} onClick={deletePotluck}>
+            Delete Potluck
+          </button>
         </div>
         <div class="ItemsToBringHeader">
           <h3>Items To Bring</h3>

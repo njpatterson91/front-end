@@ -10,3 +10,19 @@ export const createPotluck = atom({
     event_time: "",
   },
 });
+
+export const loginValues = atom({
+  key: "loginValues",
+  default: {
+    username: "",
+    password: "",
+  },
+});
+export const displayedPotluck = atom({
+  key: "displayedPotluck",
+  default: {},
+});
+export const displayedPotluckGuests = atom({
+  key: "displayedPotluckGuests",
+  default: {},
+});
