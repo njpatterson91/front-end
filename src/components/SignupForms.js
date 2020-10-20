@@ -44,7 +44,9 @@ const StyledBtn = styled.button`
 const initialprofiles = [];
 
 const initialFormValues = {
+  userName: "",
   name: "",
+  lastName: "",
   email: "",
   password: "",
 };
@@ -109,11 +111,20 @@ export default function Form(props) {
           </div>
 
           <NiceDiv>
-              <label htmlFor = 'name'> Name </label>
+              <label htmlFor = 'name'>First Name </label>
                   <StyledInput 
                   type = 'text'
-                  name = 'name'
+                  name = 'fName'
                   value = {formValues.name}
+                  onChange={onChange}
+              />
+          </NiceDiv>
+          <NiceDiv>
+              <label htmlFor = 'name'> Last Name </label>
+                  <StyledInput 
+                  type = 'text'
+                  name = 'lName'
+                  value = {formValues.lastName}
                   onChange={onChange}
               />
           </NiceDiv>
@@ -128,7 +139,15 @@ export default function Form(props) {
                       onChange={onChange}
                   />
           </NiceDiv>
-
+          <NiceDiv>
+              <label htmlFor = 'name'> Username </label>
+                  <StyledInput 
+                  type = 'text'
+                  name = 'userName'
+                  value = {formValues.userName}
+                  onChange={onChange}
+              />
+          </NiceDiv>
           <NiceDiv>
               <label htmlFor = 'password'> Password</label>
               <StyledInput 
