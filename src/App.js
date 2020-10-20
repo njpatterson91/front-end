@@ -1,12 +1,11 @@
-import React from 'react';
+
+import React from "react";
+import logo from "./logo.svg";
+import PotluckView from "./views/PotluckView";
+import CreatePotluck from "./views/CreatePotluck";
 import Login from "./components/Login"
-import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <Login />
-    </div>
-  );
+  return <CreatePotluck />;
 }
 export default App;
