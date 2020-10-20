@@ -45,7 +45,7 @@ const initialprofiles = [];
 
 const initialFormValues = {
   userName: "",
-  name: "",
+  firstName: "",
   lastName: "",
   email: "",
   password: "",
