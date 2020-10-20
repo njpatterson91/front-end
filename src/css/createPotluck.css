@@ -1,0 +1,88 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px 10px;
+  grid-template-areas:
+    "NavBar NavBar NavBar NavBar NavBar"
+    ". CreatePotluckHeader CreatePotluckHeader CreatePotluckHeader ."
+    ". Date Time Location ."
+    ". Date Time Location ."
+    ". NeededItemsHeader NeededItemsHeader NeededItemsHeader ."
+    ". ItemList ItemList ItemList ."
+    ". ItemList ItemList ItemList ."
+    ". ItemList ItemList ItemList ."
+    ". ItemList ItemList ItemList ."
+    ". AddItem AddItem AddItem .";
+  max-height: 100vh;
+  min-height: 100vh;
+  background-color: #457b9d;
+}
+
+.NavBar {
+  grid-area: NavBar;
+}
+
+.CreatePotluckHeader {
+  grid-area: CreatePotluckHeader;
+  background-color: #1d3557;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.Date {
+  grid-area: Date;
+  background-color: #f1faee;
+  margin: 0% 2%;
+  margin-bottom: 1%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Location {
+  grid-area: Location;
+  background-color: #f1faee;
+  margin: 0% 2%;
+  margin-bottom: 1%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Time {
+  grid-area: Time;
+  background-color: #f1faee;
+  margin: 0% 2%;
+  margin-bottom: 1%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.NeededItemsHeader {
+  grid-area: NeededItemsHeader;
+  background-color: #1d3557;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.ItemList {
+  grid-area: ItemList;
+  background-color: #f1faee;
+  margin: 0% 2%;
+  margin-bottom: 1%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.AddItem {
+  grid-area: AddItem;
+  background-color: #285ca5;
+  margin-bottom: 2%;
+}
+
+/* For presentation only, no need to copy the code below */
+p {
+  text-align: center;
+  border-bottom: 2px solid black;
+  margin: 0 auto;
+  font-size: 20px;
+}
