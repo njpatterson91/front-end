@@ -1,10 +1,10 @@
-
 import React from "react";
 import logo from "./logo.svg";
 import PotluckView from "./views/PotluckView";
 import CreatePotluck from "./views/CreatePotluck";
-  import Form from './components/SignupForms'
-import Login from "./components/Login"
+import Form from "./components/SignupForms";
+import Login from "./components/Login";
+import { Route, Switch } from "react-router";
 
 function App() {
   return (
@@ -19,3 +19,4 @@ function App() {
   );
 }
 
+export default App;
