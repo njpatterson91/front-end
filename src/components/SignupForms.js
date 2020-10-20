@@ -1,13 +1,16 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import '../components/SignupForms';
 import styled from 'styled-components'
+import schema from '../schema/schema'
 
 const AppHead = styled.div`
 background-image: url('https://images.unsplash.com/photo-1575879911904-ca5d889c6c7e?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=4800');
 
 background-size: 100%;
 `
-
+const Title = styled.h2`
+margin-bottom: 0%auto;
+`
 const NiceDiv = styled.div `
 margin:3% 5% 5% 5%;
 font-weight: bold;
@@ -42,12 +45,31 @@ margin-bottom: 5%;
 transition: all .5s ease-in-out;
 
 `
+    const initialprofiles= []
 
-export default function Form(props){
-  
-    const { values, submit, change, disabled, errors } = props;
+    const initialFormValues = {
+        name:'',
+        email: '',
+       password: '',
+      }
+      const initialFormErrors = {
+        username: "",
+        email: "",
+       password: "",
+        terms: "",
+      };
+      const initialDisabled = false;
+
+      
+      export default function Form(props){
+          const [formValues, setFormValues] = useState(initialFormValues)
+          const [formErrors, setFormErrors] = useState(initialFormErrors);
+          const [disabled, setDisabled] = useState(initialDisabled)
+          const [profiles, setprofiles] = useState(initialprofiles)
+          
+    const { values, submit, change, errors } = props;
  
-    
+           
     const onSubmit = (evt) => {
         evt.preventDefault();
         submit();
@@ -58,8 +80,38 @@ export default function Form(props){
         const valueToUse = type === "checkbox" ? checked : value;
         change(name, valueToUse);
     };
+
+    const formSubmit = () => {
+        const newProfile = {
+          name: formValues.name.trim(),
+          email: formValues.email.trim(),
+          password: formValues.password.trim(),
+        }
+        setprofiles(...profiles, newProfile)
+      }
+      
+    
+       useEffect(() => {
+        schema.isValid(formValues).then((valid) => {
+         setDisabled(!valid);
+        });
+      }, [formValues]);
+      console.log(profiles)
+    
   return (
-    <form id ='theform' onSubmit = {onSubmit}>
+            <form id ='theform' onSubmit = {onSubmit}>
+                <div className="App">
+                <header className="App-header">
+                    <Title>Potluck Planner</Title>
+                </header>
+                    <Form
+                     values={formValues}
+                     submit={formSubmit}
+                     disabled={disabled}
+                     errors={formErrors}
+                    />
+                 </div>
+
         <AppHead className="App">
 
             <div className="errors">
