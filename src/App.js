@@ -1,9 +1,21 @@
-import React from 'react';
-import Form from './components/SignupForms'
-import './App.css';
 
+import React from "react";
+import logo from "./logo.svg";
+import PotluckView from "./views/PotluckView";
+import CreatePotluck from "./views/CreatePotluck";
+  import Form from './components/SignupForms'
+import Login from "./components/Login"
 
-export default function App() {
-  return <Form/>
+function App() {
+  return (
+    <Switch>
+      <Route path="/create">
+        <CreatePotluck />
+      </Route>
+      <Route path="/">
+        <PotluckView />
+      </Route>
+    </Switch>
+  );
 }
 
