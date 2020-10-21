@@ -12,6 +12,7 @@ import Potlucks from "./views/MyPotlucks";
 import EditPotluck from "./views/EditPotluck";
 import SignUpForms from "./components/SignupForms";
 import TempSignUp from "./components/TempSignUp";
+import Dashboard from "./views/Dashboard";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
       <PrivateRoute path="/editpotluck/:id" component={EditPotluck} />
       <PrivateRoute path="/mypotlucks" component={Potlucks} />
       <PrivateRoute path="/view/:id" component={PotluckView} />
-      <PrivateRoute path="/dashboard" component={UserProfile} />
+      <PrivateRoute path="/dashboard/" component={Dashboard} />
       <Route path="/:id/test">
         <Test />
       </Route>
@@ -28,7 +29,7 @@ function App() {
         <Login />
       </Route>
       <Route path="/">
-        <SignUpForms />
+        <TempSignUp />
       </Route>
     </Switch>
   );

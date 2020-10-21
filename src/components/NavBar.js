@@ -7,7 +7,7 @@ export default function NavBar() {
     <div class="NavBar">
       <button
         onClick={() => {
-          history.push("/");
+          history.push("/dashboard");
         }}
       >
         Home
