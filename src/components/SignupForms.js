@@ -42,6 +42,7 @@ const StyledBtn = styled.button`
   }
   transition: all 0.5s ease-in-out;
 `;
+
 const initialValues = {
   first_name: "",
   last_name: "",
@@ -51,6 +52,7 @@ const initialValues = {
 };
 
 const initialFormErrors = {
+
   first_name: "",
   last_name: "",
   username: "",
@@ -81,10 +83,12 @@ export default function Form(props) {
   };
 
   const onChange = (evt) => {
+
     const { name, value } = evt.target;
     /* const valueToUse = type === "checkbox" ? checked : value;
     change(name, valueToUse); */
     console.log(disabled);
+
     setFormValues({
       ...formValues,
       [name]: value,
@@ -104,6 +108,7 @@ export default function Form(props) {
           [name]: err.errors[0],
         });
       });
+
   };
 
   useEffect(() => {
@@ -123,10 +128,12 @@ export default function Form(props) {
       <AppHead className="App">
         <form id="theform">
           <div className="errors">
+
             <div>{formErrors.first_name}</div>
             <div>{formErrors.last_name}</div>
             <div>{formErrors.email}</div>
             <div>{formErrors.username}</div>
+
             <div>{formErrors.password}</div>
           </div>
 
@@ -134,8 +141,10 @@ export default function Form(props) {
             <label htmlFor="name">First Name </label>
             <StyledInput
               type="text"
+
               name="first_name"
               value={formValues.first_name}
+
               onChange={onChange}
             />
           </NiceDiv>
@@ -143,8 +152,10 @@ export default function Form(props) {
             <label htmlFor="name"> Last Name </label>
             <StyledInput
               type="text"
+
               name="last_name"
               value={formValues.last_name}
+
               onChange={onChange}
             />
           </NiceDiv>
