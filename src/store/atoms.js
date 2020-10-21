@@ -41,3 +41,8 @@ export const itemsToBring = atom({
   key: "itemsToBring",
   default: [],
 });
+
+export const itemsImResFor = atom({
+  key: "itemsImResFor",
+  default: [],
+});

@@ -1,11 +1,12 @@
 import * as yup from "yup";
 
 export default yup.object().shape({
-  fName: yup
+
+  first_name: yup
     .string()
     .required("name is required")
     .min(3, "name must be at least 3 characters"),
-  lName: yup
+  last_name: yup
     .string()
     .required("name is required")
     .min(3, "name must be at least 3 characters"),
@@ -13,7 +14,8 @@ export default yup.object().shape({
     .string()
     .email("must be a valid email address")
     .required("email is required"),
-  userName: yup
+
+  username: yup
     .string()
     .required("name is required")
     .min(3, "name must be at least 3 characters"),

@@ -17,7 +17,7 @@ import { axiosWithAuth } from "../utilities/axiosWithAuth";
 import { PotluckViewStyle as CSSGrid } from "../css/styledDiv";
 
 const initialValue = {
-  assigned_to_user_id: window.localStorage.getItem("userID"),
+  assigned_to_user_id: 9000,
   item_name: "",
 };
 
@@ -78,7 +78,7 @@ export default function PotluckView() {
         console.log("items list", res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [itemsToBring]);
 
   return (
     <CSSGrid>

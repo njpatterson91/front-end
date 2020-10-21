@@ -135,10 +135,12 @@ export const PotluckViewStyle = styled.div`
   .Facilitator {
     grid-area: Facilitator;
     background-color: #a8dadc;
+    border-radius: 10px;
+    text-align: center;
   }
   .Facilitator img {
     max-width: 35%;
-    margin-left: 30%;
+    border-radius: 10px;
   }
 
   .ItemsToBringHeader {
@@ -170,6 +172,7 @@ export const PotluckViewStyle = styled.div`
   }
 
   .ItemsImBringing {
+    text-align: center;
     grid-area: ItemsImBringing;
     background-color: #f1faee;
     margin: 0% 2%;
@@ -196,6 +199,7 @@ export const PotluckViewStyle = styled.div`
   .ChatInput {
     grid-area: ChatInput;
     background-color: #285ca5;
+    border-radius: 10px;
   }
 
   .AttendeesHeader {
