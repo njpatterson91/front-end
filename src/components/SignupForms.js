@@ -44,12 +44,16 @@ const StyledBtn = styled.button`
 const initialprofiles = [];
 
 const initialFormValues = {
-  name: "",
+  fName: "",
+  lName: "",
   email: "",
+  userName: "",
   password: "",
 };
 const initialFormErrors = {
-  username: "",
+  fName: "",
+  lName: "",
+  userName: "",
   email: "",
   password: "",
   terms: "",
@@ -70,8 +74,9 @@ export default function Form(props) {
   };
 
   const onChange = (evt) => {
-    const { name, value, type, checked } = evt.target;
-    const valueToUse = type === "checkbox" ? checked : value;
+    const { name, value} = evt.target;
+    /* const valueToUse = type === "checkbox" ? checked : value;
+    change(name, valueToUse); */
     setFormValues({
       ...formValues,
       [name]: value,
@@ -91,13 +96,14 @@ export default function Form(props) {
           [name]: err.errors[0],
         });
       });
-    change(name, valueToUse);
   };
 
   const formSubmit = () => {
     const newProfile = {
-      name: formValues.name.trim(),
+      fName: formValues.name.trim(),
+      lName: formValues.name.trim(),
       email: formValues.email.trim(),
+      userName:formValues.userName.trim(),
       password: formValues.password.trim(),
     };
     setprofiles(...profiles, newProfile);
@@ -120,8 +126,10 @@ export default function Form(props) {
       <AppHead className="App">
         <form id="theform" onSubmit={onSubmit}>
           <div className="errors">
-            <div>{formErrors.name}</div>
+            <div>{formErrors.fName}</div>
+            <div>{formErrors.lName}</div>
             <div>{formErrors.email}</div>
+            <div>{formErrors.userName}</div>
             <div>{formErrors.password}</div>
           </div>
 
@@ -130,7 +138,7 @@ export default function Form(props) {
             <StyledInput
               type="text"
               name="fName"
-              value={formValues.name}
+              value={formValues.fname}
               onChange={onChange}
             />
           </NiceDiv>
@@ -139,7 +147,7 @@ export default function Form(props) {
             <StyledInput
               type="text"
               name="lName"
-              value={formValues.lastName}
+              value={formValues.lName}
               onChange={onChange}
             />
           </NiceDiv>
