@@ -1,57 +1,104 @@
-import React from "react";
-import "../css/potluckView.css";
-import { Input, Button } from "@material-ui/core";
-import SendIcon from "@material-ui/icons/Send";
+import React, { useEffect, useState } from "react";
+import Chat from "../components/Chat";
+import Facilitator from "../components/Facilitator";
+import ItemsImBringing from "../components/ItemsImBringing";
+import Attendees from "../components/Attendees";
+import ItemsToBring from "../components/ItemsToBring";
+import NavBar from "../components/NavBar";
+import { useRecoilState } from "recoil";
+import {
+  displayedPotluck,
+  displayedPotluckGuests,
+  orgID,
+  itemsToBring,
+} from "../store/atoms";
+import { useParams } from "react-router-dom";
+import { axiosWithAuth } from "../utilities/axiosWithAuth";
+import { PotluckViewStyle as CSSGrid } from "../css/styledDiv";
+
+const initialValue = {
+  assigned_to_user_id: window.localStorage.getItem("userID"),
+  item_name: "",
+};
 
 export default function PotluckView() {
+  const params = useParams();
+  const id = params.id;
+  const [displayed, setDisplayed] = useRecoilState(displayedPotluck);
+  const [guests, setGuests] = useRecoilState(displayedPotluckGuests);
+  const [organizerID, setOrganizerID] = useRecoilState(orgID);
+  const [itemToAdd, setItemToAdd] = useState(initialValue);
+  const [itemMap, setItemMap] = useRecoilState(itemsToBring);
+
+  const addItem = (e) => {
+    console.log("test");
+    e.preventDefault();
+    axiosWithAuth()
+      .post(`/potlucks/${id}/items`, itemToAdd)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    setTimeout(() => {
+      axiosWithAuth()
+        .get(`potlucks/${id}/items`)
+        .then((res) => {
+          setItemMap(res.data);
+          console.log("items list", res.data);
+        })
+        .catch((err) => console.log(err));
+    }, 200);
+  };
+  const changeHandler = (e) => {
+    console.log("test");
+    const name = e.target.name;
+    const value = e.target.value;
+    setItemToAdd({
+      ...itemToAdd,
+      [name]: value,
+    });
+  };
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/potlucks/${id}`)
+      .then((res) => {
+        setDisplayed(res.data);
+      })
+      .catch((err) => console.log(err));
+    axiosWithAuth()
+      .get(`/potlucks/${id}/guests`)
+      .then((res) => {
+        setGuests(res.data);
+        setOrganizerID(res.data[0].user_id);
+      })
+      .catch((err) => console.log(err));
+    axiosWithAuth()
+      .get(`potlucks/${id}/items`)
+      .then((res) => {
+        setItemMap(res.data);
+        console.log("items list", res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
-    <div class="grid-container">
-      <div class="NavBar"></div>
-      <div class="Facilitator">
-        <h2>UserName</h2>
-        <img
-          src={
-            "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"
-          }
-          alt=""
-        />
-        <p>Date</p>
-        <p>Time</p>
+    <CSSGrid>
+      <div class="grid-container">
+        <NavBar />
+        <Facilitator />
+        <ItemsToBring />
+        <div class="AddItem">
+          <input
+            type="text"
+            name="item_name"
+            value={itemToAdd.item_name}
+            onChange={changeHandler}
+          />
+          <button onClick={addItem}>Add Item</button>
+        </div>
+        <ItemsImBringing />
+        <Chat />
+        <Attendees />
       </div>
-      <div class="ItemsToBringHeader">
-        <h3>Items To Bring</h3>
-      </div>
-      <div class="ItemsToBring"></div>
-      <div class="ItemsImBringingHeader">
-        <h3>Im Bringing</h3>
-      </div>
-      <div class="ItemsImBringing"></div>
-      <div class="ChatHeader">
-        <h3>Chat</h3>
-      </div>
-      <div class="Chat"></div>
-      <div class="ChatInput">
-        <Input
-          id="outlined-basic"
-          label="Outlined"
-          variant="outlined"
-          width="80%"
-          placeholder="   Type to chat"
-          style={{
-            backgroundColor: "#f1faee",
-            width: "80%",
-            margin: "3%",
-          }}
-        />
-        <Button style={{ backgroundColor: "white" }}>
-          <SendIcon />
-          Send
-        </Button>
-      </div>
-      <div class="AttendeesHeader">
-        <h3>People Coming</h3>
-      </div>
-      <div class="Attendees"></div>
-    </div>
+    </CSSGrid>
   );
 }

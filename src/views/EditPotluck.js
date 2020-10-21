@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { createPotluck } from "../store/atoms";
-import { useHistory } from "react-router-dom";
+import { displayedPotluck } from "../store/atoms";
+import { useHistory, useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utilities/axiosWithAuth";
 import { CreatePotluck as CSSGrid } from "../css/styledDiv";
 import NavBar from "../components/NavBar";
 
 export default function CreatePotluck(props) {
-  const [create, setCreate] = useRecoilState(createPotluck);
-  const id = window.localStorage.getItem("userID");
+  const [edit, setEdit] = useRecoilState(displayedPotluck);
+  const params = useParams();
+  const id = params.id;
   const changeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setCreate({
-      ...create,
+    setEdit({
+      ...edit,
       [name]: value,
     });
   };
@@ -22,10 +23,10 @@ export default function CreatePotluck(props) {
 
   const submitPotluck = () => {
     axiosWithAuth()
-      .post(`/users/${id}/potlucks`, create)
+      .put(`/potlucks/${id}`, edit)
       .then((res) => {
         console.log(res.data);
-        history.push(`/view/${res.data.newPotluck.id}`);
+        history.push(`/view/${id}`);
       })
       .catch((err) => console.log(err));
   };
@@ -38,7 +39,7 @@ export default function CreatePotluck(props) {
           <input
             type="text"
             name="event_name"
-            value={create.event_name}
+            value={edit.event_name}
             onChange={changeHandler}
           />
         </div>
@@ -47,7 +48,7 @@ export default function CreatePotluck(props) {
           <input
             type="date"
             name="event_date"
-            value={create.event_date}
+            value={edit.event_date}
             onChange={changeHandler}
           />
         </div>
@@ -56,7 +57,7 @@ export default function CreatePotluck(props) {
           <input
             type="text"
             name="event_address"
-            value={create.event_address}
+            value={edit.event_address}
             onChange={changeHandler}
           />
         </div>
@@ -65,7 +66,7 @@ export default function CreatePotluck(props) {
           <input
             type="time"
             name="event_time"
-            value={create.event_time}
+            value={edit.event_time}
             onChange={changeHandler}
           />
         </div>

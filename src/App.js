@@ -4,16 +4,26 @@ import PotluckView from "./views/PotluckView";
 import CreatePotluck from "./views/CreatePotluck";
 import Form from "./components/SignupForms";
 import Login from "./components/Login";
+import Test from "./components/TestComponent";
 import { Route, Switch } from "react-router";
+import PrivateRoute from "./utilities/PrivateRoute";
+import UserProfile from "./views/UserProfile";
+import Potlucks from "./views/MyPotlucks";
+import EditPotluck from "./views/EditPotluck";
 
 function App() {
   return (
     <Switch>
-      <Route path="/create">
-        <CreatePotluck />
+      <PrivateRoute path="/editpotluck/:id" component={EditPotluck} />
+      <PrivateRoute path="/mypotlucks" component={Potlucks} />
+      <PrivateRoute path="/view/:id" component={PotluckView} />
+      <PrivateRoute path="/dashboard" component={UserProfile} />
+      <Route path="/:id/test">
+        <Test />
       </Route>
+      <PrivateRoute exact path="/create/" component={CreatePotluck} />
       <Route path="/">
-        <PotluckView />
+        <Login />
       </Route>
     </Switch>
   );
