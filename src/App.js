@@ -18,4 +18,5 @@ function App() {
     </Switch>
   );
 }
+export default App
 
