@@ -1,8 +1,8 @@
-import  React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../components/SignupForms";
 import styled from "styled-components";
 import schema from "../schema/schema";
-import * as yup from 'yup'
+import * as yup from "yup";
 const AppHead = styled.div`
   background-image: url("https://images.unsplash.com/photo-1575879911904-ca5d889c6c7e?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=4800");
 
@@ -62,7 +62,7 @@ export default function Form(props) {
   const [disabled, setDisabled] = useState(initialDisabled);
   const [profiles, setprofiles] = useState(initialprofiles);
 
-  const  {submit, change} = props;
+  const { submit, change } = props;
 
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -72,22 +72,25 @@ export default function Form(props) {
   const onChange = (evt) => {
     const { name, value, type, checked } = evt.target;
     const valueToUse = type === "checkbox" ? checked : value;
-      setFormValues({
-          ...formValues,
-          [name]: value, 
-      });
-      yup 
-          .reach(schema, name)
-          .validate(value).then(()=>{
-              setFormErrors({
-                  ...formErrors, [name]: "",
-              })
-          })
-          .catch((err)=>{
-              setFormErrors({
-                  ...formErrors, [name]: err.errors[0],
-              })
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors,
+          [name]: "",
+        });
       })
+      .catch((err) => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0],
+        });
+      });
     change(name, valueToUse);
   };
 
@@ -107,76 +110,75 @@ export default function Form(props) {
   }, []);
 
   return (
-       <div className='body'>
-  <div className="App">
-      <header className="App-header">
+    <div className="body">
+      <div className="App">
+        <header className="App-header">
           <Title>Potluck Planner</Title>
-      </header>
+        </header>
+      </div>
 
-  </div>
-
-  <AppHead className="App">
-      <form id ='theform' onSubmit = {onSubmit}>
-
+      <AppHead className="App">
+        <form id="theform" onSubmit={onSubmit}>
           <div className="errors">
-              <div>{formErrors.name}</div>
-              <div>{formErrors.email}</div>
-              <div>{formErrors.password}</div>
+            <div>{formErrors.name}</div>
+            <div>{formErrors.email}</div>
+            <div>{formErrors.password}</div>
           </div>
 
           <NiceDiv>
-              <label htmlFor = 'name'>First Name </label>
-                  <StyledInput 
-                  type = 'text'
-                  name = 'fName'
-                  value = {formValues.name}
-                  onChange={onChange}
-              />
+            <label htmlFor="name">First Name </label>
+            <StyledInput
+              type="text"
+              name="fName"
+              value={formValues.name}
+              onChange={onChange}
+            />
           </NiceDiv>
           <NiceDiv>
-              <label htmlFor = 'name'> Last Name </label>
-                  <StyledInput 
-                  type = 'text'
-                  name = 'lName'
-                  value = {formValues.lastName}
-                  onChange={onChange}
-              />
+            <label htmlFor="name"> Last Name </label>
+            <StyledInput
+              type="text"
+              name="lName"
+              value={formValues.lastName}
+              onChange={onChange}
+            />
           </NiceDiv>
 
           <NiceDiv>
-              <label htmlFor = 'email'>Email </label>
-                  <StyledInput 
-                      type = 'text'
-                      name = 'email'
-                      id = 'email'
-                      value = {formValues.email}
-                      onChange={onChange}
-                  />
+            <label htmlFor="email">Email </label>
+            <StyledInput
+              type="text"
+              name="email"
+              id="email"
+              value={formValues.email}
+              onChange={onChange}
+            />
           </NiceDiv>
           <NiceDiv>
-              <label htmlFor = 'name'> Username </label>
-                  <StyledInput 
-                  type = 'text'
-                  name = 'userName'
-                  value = {formValues.userName}
-                  onChange={onChange}
-              />
+            <label htmlFor="name"> Username </label>
+            <StyledInput
+              type="text"
+              name="userName"
+              value={formValues.userName}
+              onChange={onChange}
+            />
           </NiceDiv>
           <NiceDiv>
-              <label htmlFor = 'password'> Password</label>
-              <StyledInput 
-                  type ='text'
-                  id = 'password' 
-                  name = 'password'
-                  value = {formValues.password}
-                  onChange={onChange}
-
-              />
+            <label htmlFor="password"> Password</label>
+            <StyledInput
+              type="text"
+              id="password"
+              name="password"
+              value={formValues.password}
+              onChange={onChange}
+            />
           </NiceDiv>
 
-       <StyledBtn id= 'signupBtn' type = 'signup' disabled = {disabled}>Sign Up!</StyledBtn>
-      </form>
-  </AppHead>
-</div>
-  )
+          <StyledBtn id="signupBtn" type="signup" disabled={disabled}>
+            Sign Up!
+          </StyledBtn>
+        </form>
+      </AppHead>
+    </div>
+  );
 }
