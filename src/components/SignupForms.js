@@ -72,6 +72,8 @@ export default function Form(props) {
   const onChange = (evt) => {
     const { name, value, type, checked } = evt.target;
     const valueToUse = type === "checkbox" ? checked : value;
+    change(name, valueToUse);
+    
       setFormValues({
           ...formValues,
           [name]: value, 
@@ -88,7 +90,6 @@ export default function Form(props) {
                   ...formErrors, [name]: err.errors[0],
               })
       })
-    change(name, valueToUse);
   };
 
   const formSubmit = () => {
