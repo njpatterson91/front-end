@@ -9,10 +9,12 @@ import { Route, Switch } from "react-router";
 import PrivateRoute from "./utilities/PrivateRoute";
 import UserProfile from "./views/UserProfile";
 import Potlucks from "./views/MyPotlucks";
+import EditPotluck from "./views/EditPotluck";
 
 function App() {
   return (
     <Switch>
+      <PrivateRoute path="/editpotluck/:id" component={EditPotluck} />
       <PrivateRoute path="/mypotlucks" component={Potlucks} />
       <PrivateRoute path="/view/:id" component={PotluckView} />
       <PrivateRoute path="/dashboard" component={UserProfile} />

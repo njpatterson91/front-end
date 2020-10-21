@@ -23,7 +23,7 @@ export default function Facilitator() {
   let history = useHistory();
   const deletePotluck = () => {
     axiosWithAuth().delete(`/potlucks/${id}`);
-    history.push("/dashboard");
+    history.push("/mypotlucks");
   };
 
   return (
@@ -40,6 +40,15 @@ export default function Facilitator() {
       <p>Location: {displayed.event_address}</p>
       <button disabled={!isOrganizer} onClick={deletePotluck}>
         Delete Potluck
+      </button>
+      <br />
+      <button
+        disabled={!isOrganizer}
+        onClick={() => {
+          history.push(`/editpotluck/${id}`);
+        }}
+      >
+        Edit Potluck
       </button>
     </div>
   );

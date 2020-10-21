@@ -22,9 +22,7 @@ export default function () {
       </div>
       <div class="Attendees" style={{ textAlign: "center" }}>
         {guests.map((item) => (
-          <p>
-            {item.first_name} {item.last_name}
-          </p>
+          <p>{item.first_name}</p>
         ))}
       </div>
     </>

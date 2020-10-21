@@ -13,8 +13,8 @@ export const CreatePotluck = styled.div`
       "NavBar NavBar NavBar NavBar NavBar"
       ". CreatePotluckHeader CreatePotluckHeader CreatePotluckHeader ."
       ". Date Time Location ."
-      ". Date Time Location ."
       ". NeededItemsHeader NeededItemsHeader NeededItemsHeader ."
+      ". ItemList ItemList ItemList ."
       ". ItemList ItemList ItemList ."
       ". ItemList ItemList ItemList ."
       ". ItemList ItemList ItemList ."
@@ -27,6 +27,7 @@ export const CreatePotluck = styled.div`
 
   .NavBar {
     grid-area: NavBar;
+    background-color: #1d3557;
   }
 
   .CreatePotluckHeader {
@@ -111,7 +112,7 @@ export const PotluckViewStyle = styled.div`
       "Facilitator ItemsToBring ItemsToBring Chat Chat"
       "Facilitator ItemsToBring ItemsToBring Chat Chat"
       "Facilitator ItemsToBring ItemsToBring Chat Chat"
-      ". ItemsToBring ItemsToBring Chat Chat"
+      ". AddItem AddItem Chat Chat"
       "AttendeesHeader ItemsImBringingHeader ItemsImBringingHeader Chat Chat"
       "Attendees ItemsImBringing ItemsImBringing Chat Chat"
       "Attendees ItemsImBringing ItemsImBringing ChatInput ChatInput"
@@ -153,6 +154,12 @@ export const PotluckViewStyle = styled.div`
     margin: 0% 2%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    text-align: center;
+  }
+  .AddItem {
+    text-align: center;
+    grid-area: AddItem;
+    background-color: #1d3557;
   }
 
   .ItemsImBringingHeader {

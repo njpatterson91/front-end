@@ -36,3 +36,8 @@ export const myPotlucksState = atom({
   key: "myPotlucksState",
   default: [],
 });
+
+export const itemsToBring = atom({
+  key: "itemsToBring",
+  default: [],
+});
