@@ -10,6 +10,7 @@ import PrivateRoute from "./utilities/PrivateRoute";
 import UserProfile from "./views/UserProfile";
 import Potlucks from "./views/MyPotlucks";
 import EditPotluck from "./views/EditPotluck";
+import SignUpForms from "./components/SignupForms";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
       </Route>
       <PrivateRoute exact path="/create/" component={CreatePotluck} />
       <Route path="/">
-        <Login />
+        <SignUpForms />
       </Route>
     </Switch>
   );
