@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../components/SignupForms";
 import styled from "styled-components";
 import schema from "../schema/schema";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 const AppHead = styled.div`
   background-image: url("https://images.unsplash.com/photo-1575879911904-ca5d889c6c7e?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=4800");
-
   background-size: 100%;
 `;
 const Title = styled.h2`
@@ -41,37 +42,49 @@ const StyledBtn = styled.button`
   }
   transition: all 0.5s ease-in-out;
 `;
-const initialprofiles = [];
-
-const initialFormValues = {
-  name: "",
+const initialValues = {
+  first_name: "",
+  last_name: "",
   email: "",
+  username: "",
   password: "",
 };
+
 const initialFormErrors = {
+  first_name: "",
+  last_name: "",
   username: "",
   email: "",
   password: "",
-  terms: "",
 };
 const initialDisabled = false;
 
 export default function Form(props) {
-  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
-  const [profiles, setprofiles] = useState(initialprofiles);
 
-  const { submit, change } = props;
-
-  const onSubmit = (evt) => {
-    evt.preventDefault();
-    submit();
+  const history = useHistory();
+  const onSignUp = (e) => {
+    e.preventDefault();
+    console.log("test");
+    axios
+      .post(
+        `https://potluck-planner-api.herokuapp.com/api/auth/register`,
+        formValues
+      )
+      .then((res) => {
+        console.log(res);
+        history.push("/login");
+      })
+      .catch((err) => console.log(err));
   };
 
   const onChange = (evt) => {
-    const { name, value, type, checked } = evt.target;
-    const valueToUse = type === "checkbox" ? checked : value;
+    const { name, value } = evt.target;
+    /* const valueToUse = type === "checkbox" ? checked : value;
+    change(name, valueToUse); */
+    console.log(disabled);
     setFormValues({
       ...formValues,
       [name]: value,
@@ -91,23 +104,13 @@ export default function Form(props) {
           [name]: err.errors[0],
         });
       });
-    change(name, valueToUse);
-  };
-
-  const formSubmit = () => {
-    const newProfile = {
-      name: formValues.name.trim(),
-      email: formValues.email.trim(),
-      password: formValues.password.trim(),
-    };
-    setprofiles(...profiles, newProfile);
   };
 
   useEffect(() => {
     schema.isValid(formValues).then((valid) => {
       setDisabled(!valid);
     });
-  }, []);
+  }, [formValues]);
 
   return (
     <div className="body">
@@ -118,10 +121,12 @@ export default function Form(props) {
       </div>
 
       <AppHead className="App">
-        <form id="theform" onSubmit={onSubmit}>
+        <form id="theform">
           <div className="errors">
-            <div>{formErrors.name}</div>
+            <div>{formErrors.first_name}</div>
+            <div>{formErrors.last_name}</div>
             <div>{formErrors.email}</div>
+            <div>{formErrors.username}</div>
             <div>{formErrors.password}</div>
           </div>
 
@@ -129,8 +134,8 @@ export default function Form(props) {
             <label htmlFor="name">First Name </label>
             <StyledInput
               type="text"
-              name="fName"
-              value={formValues.name}
+              name="first_name"
+              value={formValues.first_name}
               onChange={onChange}
             />
           </NiceDiv>
@@ -138,8 +143,8 @@ export default function Form(props) {
             <label htmlFor="name"> Last Name </label>
             <StyledInput
               type="text"
-              name="lName"
-              value={formValues.lastName}
+              name="last_name"
+              value={formValues.last_name}
               onChange={onChange}
             />
           </NiceDiv>
@@ -158,15 +163,15 @@ export default function Form(props) {
             <label htmlFor="name"> Username </label>
             <StyledInput
               type="text"
-              name="userName"
-              value={formValues.userName}
+              name="username"
+              value={formValues.username}
               onChange={onChange}
             />
           </NiceDiv>
           <NiceDiv>
             <label htmlFor="password"> Password</label>
             <StyledInput
-              type="text"
+              type="password"
               id="password"
               name="password"
               value={formValues.password}
@@ -174,7 +179,7 @@ export default function Form(props) {
             />
           </NiceDiv>
 
-          <StyledBtn id="signupBtn" type="signup" disabled={disabled}>
+          <StyledBtn id="signupBtn" onClick={onSignUp} disabled={disabled}>
             Sign Up!
           </StyledBtn>
         </form>

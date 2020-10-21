@@ -11,6 +11,7 @@ import UserProfile from "./views/UserProfile";
 import Potlucks from "./views/MyPotlucks";
 import EditPotluck from "./views/EditPotluck";
 import SignUpForms from "./components/SignupForms";
+import TempSignUp from "./components/TempSignUp";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
         <Test />
       </Route>
       <PrivateRoute exact path="/create/" component={CreatePotluck} />
+      <Route path="/login">
+        <Login />
+      </Route>
       <Route path="/">
         <SignUpForms />
       </Route>

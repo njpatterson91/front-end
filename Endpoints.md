@@ -42,3 +42,7 @@ POST /api/potlucks/:id/items --> Create a new item for the specified potluck.
 GET /api/users/:id/potlucks/:potluck_id --> Returns a specific potluck that a specific user is invited to
 
 POST /api/potlucks/:id/guests ---> for the specified potluck, this will invite a user based on their username. Only need to pass in username property.
+
+/ PUT /api/potlucks/:id/items/:item_id ----> assigns the specified item to the user who’s username is passed. Only required property is username of person you want to assign to.
+Also the ability to invite people is working, not sure I mentioned how to use it though:
+/ POST /api/potlucks/:id/guests ---> for the specified potluck, this will invite a user based on their username. Only need to pass in username property.
