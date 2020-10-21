@@ -46,3 +46,8 @@ export const itemsImResFor = atom({
   key: "itemsImResFor",
   default: [],
 });
+
+export const listOfLucks = atom({
+  key: "listOfLucks",
+  default: [],
+});
