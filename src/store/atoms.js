@@ -26,3 +26,13 @@ export const displayedPotluckGuests = atom({
   key: "displayedPotluckGuests",
   default: {},
 });
+
+export const orgID = atom({
+  key: "orgID",
+  default: 0,
+});
+
+export const myPotlucksState = atom({
+  key: "myPotlucksState",
+  default: [],
+});

@@ -13,7 +13,6 @@ export default function Test() {
       .get(`/potlucks/${id}`)
       .then((res) => {
         setTest(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
