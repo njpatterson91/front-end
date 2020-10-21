@@ -6,4 +6,6 @@ const homePage = axiosWithAuth().get('https://potluck-planner-api.herokuapp.com/
         return <div>{res.items}</div>
     })
 
+}).catch(err =>{
+    console.log(err)
 })
