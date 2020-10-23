@@ -12,6 +12,8 @@ import EditPotluck from "./views/EditPotluck";
 import SignUpForms from "./components/SignupForms";
 import TempSignUp from "./components/TempSignUp";
 import Dashboard from "./views/Dashboard";
+import DSMap from "./components/homeMapDS";
+import Get from "./components/homeMapTKB";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <PrivateRoute path="/mypotlucks" component={Potlucks} />
       <PrivateRoute path="/view/:id" component={PotluckView} />
       <PrivateRoute path="/dashboard/" component={Dashboard} />
+      <PrivateRoute path="/dsmap/" component={DSMap} />
+      <PrivateRoute path="/tkbmap/" component={Get} />
       <Route path="/:id/test">
         <Test />
       </Route>

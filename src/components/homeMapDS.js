@@ -1,9 +1,20 @@
-import { axiosWithAuth } from "../utilities/axiosWithAuth"
+import { axiosWithAuth } from "../utilities/axiosWithAuth";
+import React, { useState } from "react";
 
-axiosWithAuth()
+export default function DSMap() {
+  const [toMap, setToMap] = useState([]);
+  axiosWithAuth()
     .get("https://potluck-planner-api.herokuapp.com/api/potlucks")
-    .then((res)=>{
-        res.data.map((item)=>{
-            return <div>{item.items}</div>
-        })
+    .then((res) => {
+      setToMap(res.data);
     })
+    .catch((err) => console.log(err));
+
+  return (
+    <div>
+      {toMap.map((item) => (
+        <p>{item.event_name}</p>
+      ))}
+    </div>
+  );
+}
