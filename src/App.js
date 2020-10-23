@@ -7,7 +7,6 @@ import Login from "./components/Login";
 import Test from "./components/TestComponent";
 import { Route, Switch } from "react-router";
 import PrivateRoute from "./utilities/PrivateRoute";
-import UserProfile from "./views/UserProfile";
 import Potlucks from "./views/MyPotlucks";
 import EditPotluck from "./views/EditPotluck";
 import SignUpForms from "./components/SignupForms";
@@ -29,7 +28,7 @@ function App() {
         <Login />
       </Route>
       <Route path="/">
-        <TempSignUp />
+        <SignUpForms />
       </Route>
     </Switch>
   );
